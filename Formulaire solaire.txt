@@ -1,0 +1,4230 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devis Panneaux Solaires - Solisinnov</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de couleurs - Palette optimisée pour Solisinnov */
+    :root {
+      --primary-light: #9bdac7; /* Vert clair */
+      --primary-medium: #5ECCC3; /* Turquoise - couleur principale de Solisinnov */
+      --primary-dark: #226568; /* Vert foncé */
+      --selected-bg: #226568; /* Fond pour options sélectionnées */
+      --selected-text: #ffffff; /* Texte des options sélectionnées */
+      --accent: #FFD700; /* Jaune/Or - pour les accents */
+      --background: #f7f9fa; /* Blanc cassé légèrement bleuté */
+      --card-bg: #ffffff; /* Fond des cartes */
+      --light-gray: #f5f5f5;
+      --border-color: #e0e0e0;
+      --text-color: #333;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+      --button-color: #226568; /* Couleur du bouton suivant - plus foncée */
+      --focus-color: #226568; /* Couleur de focus */
+      --focus-outline: 2px solid #226568; /* Outline pour focus */
+      --success-color: #4CAF50; /* Couleur de succès */
+      --highlight-color: #5ECCC3; /* Couleur de mise en évidence */
+      --error-color: #ff3860; /* Couleur d'erreur */
+      --required-color: #ff3860; /* Couleur pour les champs obligatoires */
+      --input-bg: #f0f7ff; /* Fond pour les champs de saisie - bleu très clair */
+      --input-border: #c0d6e4; /* Bordure pour les champs de saisie */
+      --selected-option: #e6f7f5; /* Fond pour option sélectionnée */
+    }
+
+
+    /* Styles généraux */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      line-height: 1.5;
+      color: var(--text-color);
+      background-color: var(--background);
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* Style conteneur principal */
+    .solar-form-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+
+
+    /* En-tête plus compact */
+    .solar-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+
+    .solar-header h2 {
+      color: var(--primary-dark);
+      font-size: 24px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+
+    .solar-header p {
+      color: #555;
+      font-size: 16px;
+      margin: 0;
+    }
+
+
+    /* Barre de progression améliorée */
+    .progress-container {
+      margin-bottom: 20px;
+    }
+
+
+    .progress-bar {
+      height: 8px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+
+    .progress-fill {
+      height: 100%;
+      background-color: var(--primary-medium);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #666;
+    }
+
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      position: relative;
+    }
+
+
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--border-color);
+      z-index: 1;
+    }
+
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid var(--border-color);
+      z-index: 2;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+
+    .step-dot i {
+      font-size: 14px;
+      color: var(--border-color);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+
+    .progress-step.active .step-dot {
+      background-color: var(--primary-light);
+      border-color: var(--primary-medium);
+    }
+
+
+    .progress-step.active .step-dot i {
+      color: var(--primary-dark);
+      opacity: 1;
+    }
+
+
+    .progress-step.completed .step-dot {
+      background-color: var(--primary-medium);
+      border-color: var(--primary-medium);
+    }
+
+
+    .progress-step.completed .step-dot i {
+      color: white;
+      opacity: 1;
+    }
+
+
+    .step-label {
+      font-size: 14px;
+      margin-top: 5px;
+      text-align: center;
+      color: #777;
+      font-weight: 500;
+    }
+
+
+    .progress-step.active .step-label {
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+
+    /* Conteneur du formulaire - TAILLE FIXE */
+    .solar-form-box {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      height: 550px; /* Hauteur fixe augmentée */
+      overflow: hidden; /* Empêche les éléments de déborder */
+    }
+
+
+    /* Style pour la question active */
+    .solar-question {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto; /* Permet le défilement vertical si nécessaire */
+      overflow-x: hidden; /* Empêche le défilement horizontal */
+      transform: translateX(20px);
+    }
+
+
+    .solar-question.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+      transform: translateX(0);
+    }
+
+
+    /* Styles d'une question */
+    .solar-question h3 {
+      color: var(--primary-dark);
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .solar-question h3 i {
+      margin-right: 12px;
+      color: var(--primary-medium);
+      font-size: 22px;
+    }
+
+
+    /* Indicateur de champ obligatoire */
+    .required::after {
+      content: " *";
+      color: var(--required-color);
+      font-weight: bold;
+    }
+
+
+    /* Style pour les options verticales */
+    .solar-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+
+    .solar-option {
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: var(--transition);
+      background-color: var(--card-bg);
+      display: flex;
+      align-items: center;
+      min-height: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .solar-option:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+
+
+    .solar-option:focus {
+      outline: var(--focus-outline);
+    }
+
+
+    .solar-option.selected {
+      background-color: var(--selected-option);
+      border-color: var(--primary-medium);
+    }
+
+
+    .solar-option.selected::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: var(--primary-medium);
+    }
+
+
+    .solar-option i {
+      font-size: 20px;
+      margin-right: 10px;
+      color: var(--primary-medium);
+      min-width: 20px;
+      text-align: center;
+    }
+
+
+    .solar-option-content {
+      flex-grow: 1;
+    }
+
+
+    .solar-option-label {
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--text-color);
+    }
+
+
+    .solar-option-description {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+
+    .solar-option-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      margin-left: 10px;
+      transition: var(--transition);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+
+    .solar-option.selected .solar-option-check {
+      border-color: var(--primary-medium);
+      background-color: var(--primary-medium);
+    }
+
+
+    .solar-option.selected .solar-option-check::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 12px;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+    /* Style champs de texte */
+    .input-field {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: var(--transition);
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      -webkit-appearance: none; /* Pour iOS */
+      background-color: var(--input-bg);
+    }
+
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-medium);
+      box-shadow: 0 0 0 3px rgba(94, 204, 195, 0.2);
+    }
+
+
+    .select-field {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: var(--transition);
+      margin-bottom: 16px;
+      appearance: none;
+      background-color: var(--input-bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23226568' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      padding-right: 40px;
+      -webkit-appearance: none; /* Pour iOS */
+    }
+
+
+    .select-field:focus {
+      outline: none;
+      border-color: var(--primary-medium);
+      box-shadow: 0 0 0 3px rgba(94, 204, 195, 0.2);
+    }
+
+
+    /* Navigation du formulaire */
+    .solar-nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      margin-top: auto;
+    }
+
+
+    .solar-button {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 120px;
+      justify-content: center;
+    }
+
+
+    .solar-button:focus {
+      outline: var(--focus-outline);
+    }
+
+
+    .solar-prev {
+      background-color: var(--light-gray);
+      color: var(--text-color);
+    }
+
+
+    .solar-prev:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+
+    .solar-next {
+      background-color: var(--button-color);
+      color: white;
+    }
+
+
+    .solar-next:hover {
+      background-color: var(--accent);
+      color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+
+
+    /* Notification pour l'auto-avancement */
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background-color: var(--primary-dark);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      text-align: center;
+      max-width: 90%;
+      width: auto;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+
+    .notification-icon {
+      margin-right: 10px;
+      color: white;
+      font-size: 18px;
+    }
+
+
+    .notification-message {
+      font-size: 15px;
+    }
+
+
+    /* Styles pour les erreurs de validation */
+    .error-message {
+      color: var(--error-color);
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+
+    .error-message.visible {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+
+    /* Styles pour les sous-titres */
+    .question-subtitle {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 15px;
+      font-weight: normal;
+    }
+
+
+    /* Styles pour le focus visible */
+    *:focus-visible {
+      outline: var(--focus-outline);
+      box-shadow: 0 0 0 3px rgba(94, 204, 195, 0.2);
+    }
+
+
+    /* Styles pour les labels */
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+
+    /* Styles pour les groupes de formulaire */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+
+    /* Styles pour les champs avec icônes */
+    .input-with-icon {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+
+    .input-with-icon input {
+      padding-right: 40px;
+    }
+
+
+    .input-with-icon .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-medium);
+      font-size: 20px;
+    }
+
+
+    /* Styles pour les équipements */
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+
+    .equipment-item {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 15px;
+      background-color: white;
+    }
+
+
+    .equipment-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+
+    .equipment-title i {
+      margin-right: 10px;
+      color: var(--primary-medium);
+      font-size: 18px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+
+    .equipment-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+
+    .equipment-btn {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+
+    .equipment-btn:hover {
+      background-color: rgba(94, 204, 195, 0.1);
+      border-color: var(--primary-medium);
+    }
+
+
+    .equipment-btn.selected {
+      background-color: var(--primary-medium);
+      color: white;
+      border-color: var(--primary-medium);
+    }
+
+
+    /* Styles pour les réponses sélectionnées */
+    .answered {
+      background-color: rgba(142, 236, 200, 0.2) !important;
+      border-color: var(--highlight-color) !important;
+    }
+
+
+    /* Style pour le champ email agrandi */
+    .email-field {
+      padding: 18px !important;
+      font-size: 18px !important;
+      margin-bottom: 20px !important;
+      width: 100% !important;
+    }
+
+
+    /* Loader pour l'envoi du formulaire */
+    .loader-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary-medium);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+
+    .loader-text {
+      font-size: 18px;
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+
+    /* RGPD checkbox */
+    .rgpd-container {
+      margin: 22px 0;
+      display: flex;
+      align-items: flex-start;
+      background-color: rgba(94, 204, 195, 0.1);
+      padding: 14px;
+      border-radius: 8px;
+    }
+
+
+    .rgpd-container input {
+      margin-top: 3px;
+      margin-right: 10px;
+      accent-color: var(--primary-medium);
+      width: 20px;
+      height: 20px;
+    }
+
+
+    .rgpd-text {
+      font-size: 15px;
+      color: #555;
+    }
+
+
+    .rgpd-text a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+
+    .rgpd-text a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* Style pour le récapitulatif */
+    .summary-section {
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+
+    .summary-section h4 {
+      color: var(--primary-dark);
+      font-size: 18px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .summary-section h4 i {
+      margin-right: 10px;
+      color: var(--primary-medium);
+    }
+
+
+    .summary-item {
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+
+    .summary-label {
+      font-weight: 500;
+      color: var(--text-color);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+
+    .summary-value {
+      color: #555;
+      display: block;
+      font-weight: 400;
+    }
+
+
+    /* Nouvelle boussole améliorée et optimisée */
+    .compass-container {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      margin: 0 auto 20px;
+    }
+
+
+    .compass-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      background-color: #f5f5f5;
+      position: relative;
+    }
+
+
+    .compass-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--primary-medium);
+      z-index: 2;
+    }
+
+
+    .compass-direction {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+      z-index: 3;
+      background-color: white;
+      border: 2px solid var(--border-color);
+    }
+
+
+    .compass-direction:hover {
+      background-color: rgba(94, 204, 195, 0.2);
+      border-color: var(--primary-medium);
+      transform: scale(1.1);
+    }
+
+
+    .compass-direction.selected {
+      background-color: var(--accent);
+      color: #333;
+      border-color: var(--accent);
+    }
+
+
+    .compass-n {
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+
+    .compass-e {
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+
+
+    .compass-s {
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+
+    .compass-w {
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+
+
+    .compass-ne {
+      top: 60px;
+      right: 60px;
+    }
+
+
+    .compass-se {
+      bottom: 60px;
+      right: 60px;
+    }
+
+
+    .compass-sw {
+      bottom: 60px;
+      left: 60px;
+    }
+
+
+    .compass-nw {
+      top: 60px;
+      left: 60px;
+    }
+
+
+    /* Styles pour les inclinaisons avec visualisation plus compacte */
+    .inclination-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 15px;
+      justify-content: center;
+    }
+
+
+    .inclination-option {
+      flex: 1 0 calc(25% - 12px);
+      text-align: center;
+      cursor: pointer;
+      padding: 10px 5px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background-color: white;
+      min-width: 70px;
+      max-width: 90px;
+      position: relative;
+    }
+
+
+    .inclination-option:hover {
+      border-color: var(--primary-medium);
+      transform: translateY(-2px);
+    }
+
+
+    .inclination-option.selected {
+      background-color: rgba(255, 215, 0, 0.2);
+      border-color: var(--accent);
+    }
+
+
+    .inclination-icon {
+      height: 60px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    .inclination-label {
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+
+    /* Styles pour les icônes de toit avec différentes inclinaisons - AMÉLIORÉES */
+    .roof-icon {
+      width: 70px;
+      height: 50px;
+      position: relative;
+      margin: 0 auto;
+    }
+
+
+    /* Nouvelle version des icônes de toit avec maison */
+    .house-container {
+      width: 70px;
+      height: 60px;
+      position: relative;
+    }
+
+
+    .house-walls {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      width: 50px;
+      height: 25px;
+      background-color: #e0e0e0;
+      border: 1px solid #999;
+    }
+
+
+    .house-roof-flat {
+      position: absolute;
+      bottom: 25px;
+      left: 8px;
+      width: 54px;
+      height: 5px;
+      background-color: var(--primary-medium);
+      border: 1px solid #226568;
+    }
+
+
+    .house-roof-15 {
+      position: absolute;
+      bottom: 25px;
+      left: 10px;
+      width: 50px;
+      height: 10px;
+      background-color: var(--primary-medium);
+      clip-path: polygon(0 100%, 100% 100%, 50% 0);
+      border-left: 1px solid #226568;
+      border-right: 1px solid #226568;
+      border-top: 1px solid #226568;
+    }
+
+
+    .house-roof-30 {
+      position: absolute;
+      bottom: 25px;
+      left: 10px;
+      width: 50px;
+      height: 20px;
+      background-color: var(--primary-medium);
+      clip-path: polygon(0 100%, 100% 100%, 50% 0);
+      border-left: 1px solid #226568;
+      border-right: 1px solid #226568;
+      border-top: 1px solid #226568;
+    }
+
+
+    .house-roof-45 {
+      position: absolute;
+      bottom: 25px;
+      left: 10px;
+      width: 50px;
+      height: 35px;
+      background-color: var(--primary-medium);
+      clip-path: polygon(0 100%, 100% 100%, 50% 0);
+      border-left: 1px solid #226568;
+      border-right: 1px solid #226568;
+      border-top: 1px solid #226568;
+    }
+
+
+    .house-door {
+      position: absolute;
+      bottom: 0;
+      left: 22px;
+      width: 12px;
+      height: 15px;
+      background-color: #226568;
+      border-radius: 2px 2px 0 0;
+    }
+
+
+    .house-window {
+      position: absolute;
+      bottom: 12px;
+      right: 18px;
+      width: 8px;
+      height: 8px;
+      background-color: #a8d8ff;
+      border: 1px solid #226568;
+    }
+
+
+    /* Styles pour les onglets de toiture */
+    .roof-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+
+    .roof-tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      background-color: #f5f5f5;
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      margin-right: 5px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 14px;
+      position: relative;
+    }
+
+
+    .roof-tab:hover {
+      background-color: #e9e9e9;
+    }
+
+
+    .roof-tab.active {
+      background-color: white;
+      border-color: var(--border-color);
+      border-bottom: 1px solid white;
+      margin-bottom: -1px;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+
+    .roof-tab-close {
+      margin-left: 8px;
+      color: #999;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+
+    .roof-tab-close:hover {
+      color: #ff3860;
+    }
+
+
+    /* Message de succès */
+    .success-message {
+      display: none;
+      background-color: var(--success-color);
+      color: white;
+      padding: 25px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+
+    .success-message h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+
+    .success-message p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+
+    .success-message .blog-link {
+      display: inline-block;
+      background-color: white;
+      color: var(--primary-dark);
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+
+
+    .success-message .blog-link:hover {
+      background-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .success-message .blog-link i {
+      margin-right: 8px;
+    }
+
+
+    /* Styles pour les champs d'informations personnelles */
+    .personal-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+
+    .personal-info-grid .form-group:nth-child(5) {
+      grid-column: 1 / span 2;
+    }
+
+
+    /* Style pour le champ adresse agrandi */
+    .address-field {
+      padding: 15px !important;
+      font-size: 16px !important;
+      min-height: 60px !important;
+      width: 100% !important;
+      resize: vertical;
+    }
+
+
+    /* Grille pour les options de puissance souscrite */
+    .power-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+
+    .power-option {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: white;
+    }
+
+
+    .power-option:hover {
+      border-color: var(--primary-medium);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+
+    .power-option.selected {
+      background-color: var(--selected-option);
+      border-color: var(--primary-medium);
+    }
+
+
+    .power-icon {
+      color: var(--primary-medium);
+      margin-right: 5px;
+      font-size: 14px;
+    }
+
+
+    .power-label {
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+
+    .power-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      margin-left: auto;
+      position: relative;
+    }
+
+
+    .power-option.selected .power-check {
+      border-color: var(--primary-medium);
+      background-color: var(--primary-medium);
+    }
+
+
+    .power-option.selected .power-check::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 9px;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+    /* Styles pour la gestion des toitures multiples */
+    .roof-management {
+      margin-bottom: 20px;
+    }
+
+
+    .roof-list {
+      margin-bottom: 15px;
+    }
+
+
+    .roof-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+
+    .roof-item-info {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .roof-item-icon {
+      margin-right: 10px;
+      color: var(--primary-medium);
+    }
+
+
+    .roof-item-details {
+      font-size: 14px;
+    }
+
+
+    .roof-item-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+
+    .roof-item-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+
+    .roof-item-btn:hover {
+      color: var(--primary-dark);
+    }
+
+
+    .roof-item-btn.delete:hover {
+      color: var(--error-color);
+    }
+
+
+    .add-roof-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: var(--selected-option);
+      color: var(--primary-dark);
+      border: 1px dashed var(--primary-medium);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+
+    .add-roof-btn:hover {
+      background-color: rgba(94, 204, 195, 0.2);
+    }
+
+
+    .add-roof-btn i {
+      margin-right: 8px;
+    }
+
+
+    /* Section électricité regroupée */
+    .electricity-section {
+      margin-bottom: 20px;
+    }
+
+
+    .electricity-section h4 {
+      color: var(--primary-dark);
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .electricity-section h4 i {
+      margin-right: 8px;
+      color: var(--primary-medium);
+    }
+
+
+    /* Styles pour les questions de toiture */
+    .roof-details {
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+
+    .roof-details-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+    }
+
+
+    .roof-details-title i {
+      margin-right: 8px;
+      color: var(--primary-medium);
+    }
+
+
+    .roof-details-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+
+    .roof-details-grid .form-group {
+      margin-bottom: 0;
+    }
+
+
+    /* Styles pour les disponibilités */
+    .availability-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+
+    .availability-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+
+    .availability-option:hover {
+      border-color: var(--primary-medium);
+      background-color: rgba(94, 204, 195, 0.05);
+    }
+
+
+    .availability-option.selected {
+      background-color: var(--selected-option);
+      border-color: var(--primary-medium);
+    }
+
+
+    .availability-checkbox {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      accent-color: var(--primary-medium);
+    }
+
+
+    .availability-icon {
+      margin-right: 10px;
+      color: var(--primary-medium);
+      font-size: 18px;
+    }
+
+
+    .availability-label {
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+
+    /* Styles pour le calendrier du projet */
+    .calendar-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+
+    .calendar-option {
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+
+    .calendar-option:hover {
+      border-color: var(--primary-medium);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+
+    .calendar-option.selected {
+      background-color: var(--selected-option);
+      border-color: var(--primary-medium);
+    }
+
+
+    .calendar-icon {
+      font-size: 28px;
+      color: var(--primary-medium);
+      margin-bottom: 10px;
+    }
+
+
+    .calendar-label {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+
+    /* Styles pour l'ancienneté du logement */
+    .house-age-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+
+    .house-age-option {
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+
+    .house-age-option:hover {
+      border-color: var(--primary-medium);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+
+    .house-age-option.selected {
+      background-color: var(--selected-option);
+      border-color: var(--primary-medium);
+    }
+
+
+    .house-age-icon {
+      font-size: 28px;
+      color: var(--primary-medium);
+      margin-bottom: 10px;
+    }
+
+
+    .house-age-label {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+
+    /* Style pour le champ commentaire */
+    .comment-field {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      font-size: 16px;
+      min-height: 100px;
+      resize: vertical;
+      margin-bottom: 20px;
+      background-color: var(--input-bg);
+    }
+
+
+    .comment-field:focus {
+      outline: none;
+      border-color: var(--primary-medium);
+      box-shadow: 0 0 0 3px rgba(94, 204, 195, 0.2);
+    }
+
+
+    /* Optimisations pour mobile */
+    @media (max-width: 768px) {
+      .solar-form-container {
+        padding: 10px;
+      }
+
+
+      .solar-form-box {
+        padding: 15px;
+        height: 600px; /* Hauteur fixe pour mobile */
+      }
+
+
+      .solar-question {
+        padding: 15px;
+      }
+
+
+      .solar-question h3 {
+        font-size: 16px;
+      }
+
+
+      .solar-button {
+        padding: 10px 12px;
+        font-size: 14px;
+        min-width: 90px;
+      }
+
+
+      .step-label {
+        display: none;
+      }
+
+
+      .equipment-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .inclination-options {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+
+      .inclination-option {
+        flex: 1 0 calc(50% - 12px);
+      }
+
+
+      .personal-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .personal-info-grid .form-group:nth-child(5) {
+        grid-column: 1;
+      }
+
+
+      .compass-container {
+        width: 180px;
+        height: 180px;
+      }
+
+
+      .compass-direction {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+      }
+
+
+      .power-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+
+      .roof-details-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .availability-options,
+      .calendar-options,
+      .house-age-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+      .solar-form-box {
+        height: 650px; /* Hauteur fixe pour petit mobile */
+        padding: 12px;
+      }
+
+
+      .solar-question {
+        padding: 12px;
+      }
+
+
+      .compass-container {
+        width: 160px;
+        height: 160px;
+      }
+
+
+      .compass-direction {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+      }
+
+
+      .inclination-option {
+        flex: 1 0 calc(50% - 8px);
+        padding: 8px 4px;
+      }
+
+
+      .inclination-icon {
+        height: 30px;
+      }
+
+
+      .inclination-label {
+        font-size: 11px;
+      }
+
+
+      .solar-header h2 {
+        font-size: 20px;
+      }
+
+
+      .solar-header p {
+        font-size: 14px;
+      }
+
+
+      .power-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+
+    /* Ajouter un style pour le défilement automatique */
+    .auto-scroll {
+      scroll-behavior: smooth;
+    }
+
+
+    /* Styles pour les étapes de toiture */
+    .roof-step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+
+    .roof-step.active {
+      display: block;
+    }
+
+
+    .roof-step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .roof-step-title i {
+      margin-right: 8px;
+      color: var(--primary-medium);
+    }
+
+
+    /* Navigation des étapes de toiture */
+    .roof-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+
+    .roof-button {
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 100px;
+      justify-content: center;
+    }
+
+
+    .roof-prev {
+      background-color: var(--light-gray);
+      color: var(--text-color);
+    }
+
+
+    .roof-next {
+      background-color: var(--button-color);
+      color: white;
+      margin-left: auto;
+    }
+
+
+    .roof-next:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* Indicateur d'étape de toiture */
+    .roof-steps-indicator {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+
+
+    .roof-step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+
+    .roof-step-dot.active {
+      background-color: var(--primary-medium);
+      transform: scale(1.2);
+    }
+
+
+    /* Animation de pulsation pour le bouton d'envoi */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+
+    /* Styles pour les types de couverture */
+    .roof-cover-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+
+    .roof-cover-option {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+
+    .roof-cover-option:hover {
+      border-color: var(--primary-medium);
+      transform: translateY(-2px);
+    }
+
+
+    .roof-cover-option.selected {
+      background-color: rgba(255, 215, 0, 0.2);
+      border-color: var(--accent);
+    }
+
+
+    .roof-cover-icon {
+      font-size: 24px;
+      color: var(--primary-medium);
+      margin-bottom: 5px;
+    }
+
+
+    .roof-cover-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+
+    /* Style pour le message de confirmation */
+    .confirmation-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--primary-dark);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1100;
+      text-align: center;
+      max-width: 90%;
+      width: 400px;
+      display: none;
+    }
+
+
+    .confirmation-message h3 {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+
+    .confirmation-message h3 i {
+      margin-right: 10px;
+      color: var(--accent);
+    }
+
+
+    .confirmation-message p {
+      margin-bottom: 20px;
+    }
+
+
+    .confirmation-button {
+      background-color: white;
+      color: var(--primary-dark);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+
+    .confirmation-button:hover {
+      background-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+
+    /* Animations avec la couleur accent */
+    @keyframes glow {
+      0% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
+      50% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+      100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
+    }
+
+
+    .accent-glow {
+      animation: glow 2s infinite;
+    }
+
+
+    .accent-border {
+      border-color: var(--accent) !important;
+    }
+
+
+    .accent-bg {
+      background-color: var(--accent) !important;
+      color: #333 !important;
+    }
+
+
+    .solar-option:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+
+
+    .solar-next:hover {
+      background-color: var(--accent);
+      color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+
+
+    .step-dot {
+      transition: all 0.5s ease;
+    }
+
+
+    .progress-step.completed .step-dot {
+      background-color: var(--accent);
+      border-color: var(--accent);
+    }
+
+
+    .compass-direction.selected {
+      background-color: var(--accent);
+      color: #333;
+      border-color: var(--accent);
+    }
+
+
+    .inclination-option.selected {
+      background-color: rgba(255, 215, 0, 0.2);
+      border-color: var(--accent);
+    }
+
+
+    .roof-cover-option.selected {
+      background-color: rgba(255, 215, 0, 0.2);
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+<div class="solar-form-container">
+  <div class="solar-header">
+    <h2>Votre devis Panneaux Solaires en 2 minutes</h2>
+    <p>Configurez votre installation et recevez un devis personnalisé</p>
+  </div>
+
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-text">
+      <span id="progress-percent">0%</span>
+      <span id="progress-steps">Étape 1/10</span>
+    </div>
+   
+    <div class="progress-steps">
+      <div class="progress-step active" data-step="1">
+        <div class="step-dot">
+          <i class="fas fa-solar-panel"></i>
+        </div>
+        <div class="step-label">Projet</div>
+      </div>
+      <div class="progress-step" data-step="2">
+        <div class="step-dot">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="step-label">Logement</div>
+      </div>
+      <div class="progress-step" data-step="3">
+        <div class="step-dot">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="step-label">Consommation</div>
+      </div>
+      <div class="progress-step" data-step="4">
+        <div class="step-dot">
+          <i class="fas fa-solar-panel"></i>
+        </div>
+        <div class="step-label">Toiture</div>
+      </div>
+      <div class="progress-step" data-step="5">
+        <div class="step-dot">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="step-label">Coordonnées</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="success-message" class="success-message">
+    <h3><i class="fas fa-check-circle"></i> Demande envoyée avec succès !</h3>
+    <p>Merci pour votre demande de devis. Un expert Solisinnov vous contactera très prochainement pour établir votre devis personnalisé.</p>
+    <p>En attendant, vous pouvez consulter notre blog pour en savoir plus sur les panneaux solaires :</p>
+    <a href="https://solisinnov.fr/category/photovoltaique/" class="blog-link" target="_blank">
+      <i class="fas fa-book-open"></i> Découvrir notre blog photovoltaïque
+    </a>
+  </div>
+
+
+  <div class="solar-form-box" id="form-container">
+    <form id="solar-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="a9a0d9b0-aa63-428a-8f5e-41ca330dbade">
+      <input type="hidden" name="subject" value="Nouvelle demande de devis panneaux solaires">
+      <input type="hidden" name="redirect" value="https://solisinnov.fr/merci">
+     
+      <!-- Question 1 - Type de projet -->
+      <div class="solar-question active" data-question="1">
+        <h3 class="required"><i class="fas fa-solar-panel"></i> Quel est votre projet ?</h3>
+       
+        <div class="solar-options">
+          <div class="solar-option" data-value="Autoconsommation totale avec Batterie physique" onclick="selectOption(this, 'type_projet')">
+            <i class="fas fa-solar-panel"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">Autoconsommation totale avec Batterie physique</div>
+              <div class="solar-option-description">Stockez votre surplus d'énergie dans une batterie pour l'utiliser plus tard</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+         
+          <div class="solar-option" data-value="Autoconsommation totale avec Batterie virtuelle" onclick="selectOption(this, 'type_projet')">
+            <i class="fas fa-cloud"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">Autoconsommation totale avec Batterie virtuelle</div>
+              <div class="solar-option-description">Stockez virtuellement votre surplus d'énergie pour l'utiliser plus tard</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+         
+          <div class="solar-option" data-value="Autoconsommation avec vente de surplus" onclick="selectOption(this, 'type_projet')">
+            <i class="fas fa-exchange-alt"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">Autoconsommation avec vente de surplus</div>
+              <div class="solar-option-description">Consommez votre énergie et vendez le surplus au réseau</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+         
+          <div class="solar-option" data-value="Je m'informe pour faire un choix" onclick="selectOption(this, 'type_projet')">
+            <i class="fas fa-info-circle"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">Je m'informe pour faire un choix</div>
+              <div class="solar-option-description">Recevez des informations pour vous aider à choisir la meilleure solution</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+        </div>
+       
+        <input type="hidden" name="type_projet" id="type_projet">
+        <div class="error-message" id="type_projet-error">Veuillez sélectionner une option</div>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" disabled>
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('type_projet')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+     
+      <!-- Question 2 - Type de logement, Ancienneté et Statut d'occupation (regroupés) -->
+      <div class="solar-question" data-question="2">
+        <h3 class="required"><i class="fas fa-home"></i> Votre logement</h3>
+       
+        <div class="form-group">
+          <label for="type_logement" class="required">Type de logement</label>
+          <div class="solar-options" style="max-height: 180px; overflow-y: auto;">
+            <div class="solar-option" data-value="Maison individuelle" onclick="selectOption(this, 'type_logement')">
+              <i class="fas fa-house"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Maison individuelle</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+           
+            <div class="solar-option" data-value="Appartement" onclick="selectOption(this, 'type_logement')">
+              <i class="fas fa-building"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Appartement</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+           
+            <div class="solar-option" data-value="Immeuble collectif" onclick="selectOption(this, 'type_logement')">
+              <i class="fas fa-city"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Immeuble collectif</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+           
+            <div class="solar-option" data-value="Local professionnel" onclick="selectOption(this, 'type_logement')">
+              <i class="fas fa-industry"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Local professionnel</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+          </div>
+          <input type="hidden" name="type_logement" id="type_logement">
+          <div class="error-message" id="type_logement-error">Veuillez sélectionner une option</div>
+        </div>
+       
+        <div class="form-group">
+          <label for="anciennete_logement" class="required">Ancienneté du logement</label>
+          <div class="house-age-options" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">
+            <div class="house-age-option" onclick="selectOption(this, 'anciennete_logement'); document.getElementById('anciennete_logement').value = 'Moins de 2 ans';">
+              <div class="house-age-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="house-age-label">- de 2 ans</div>
+            </div>
+           
+            <div class="house-age-option" onclick="selectOption(this, 'anciennete_logement'); document.getElementById('anciennete_logement').value = 'Plus de 2 ans';">
+              <div class="house-age-icon">
+                <i class="fas fa-landmark"></i>
+              </div>
+              <div class="house-age-label">+ de 2 ans</div>
+            </div>
+          </div>
+          <input type="hidden" name="anciennete_logement" id="anciennete_logement">
+          <div class="error-message" id="anciennete_logement-error">Veuillez sélectionner l'ancienneté de votre logement</div>
+        </div>
+       
+        <div class="form-group">
+          <label for="statut_occupation" class="required">Vous êtes</label>
+          <div class="solar-options" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+            <div class="solar-option" data-value="Propriétaire" onclick="selectOption(this, 'statut_occupation')">
+              <i class="fas fa-key"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Propriétaire</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+           
+            <div class="solar-option" data-value="Locataire" onclick="selectOption(this, 'statut_occupation')">
+              <i class="fas fa-file-signature"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Locataire</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+          </div>
+          <input type="hidden" name="statut_occupation" id="statut_occupation">
+          <div class="error-message" id="statut_occupation-error">Veuillez sélectionner une option</div>
+        </div>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next accent-glow" onclick="validateAndNext('logement_complet')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+     
+      <!-- Question 4 - Surface et Occupants -->
+      <div class="solar-question" data-question="4">
+        <h3 class="required"><i class="fas fa-home"></i> Votre logement</h3>
+ 
+  <div class="form-group">
+    <label for="surface" class="required">Superficie de votre logement (m²)</label>
+    <div class="input-with-icon">
+      <input type="number" inputmode="numeric" class="input-field" name="surface" id="surface" placeholder="120" min="1">
+      <div class="input-icon">
+        <i class="fas fa-ruler-combined"></i>
+      </div>
+    </div>
+    <div class="error-message" id="surface-error">Veuillez indiquer la surface de votre logement</div>
+  </div>
+ 
+  <div class="form-group">
+    <label for="nb_occupants" class="required">Nombre de personnes dans le logement</label>
+    <div class="solar-options" style="max-height: 250px; overflow-y: auto;">
+      <div class="solar-option" data-value="1" onclick="selectOption(this, 'nb_occupants')">
+        <i class="fas fa-user"></i>
+        <div class="solar-option-content">
+          <div class="solar-option-label">1 personne</div>
+        </div>
+        <div class="solar-option-check"></div>
+      </div>
+     
+      <div class="solar-option" data-value="2" onclick="selectOption(this, 'nb_occupants')">
+        <i class="fas fa-user-friends"></i>
+        <div class="solar-option-content">
+          <div class="solar-option-label">2 personnes</div>
+        </div>
+        <div class="solar-option-check"></div>
+      </div>
+     
+      <div class="solar-option" data-value="3" onclick="selectOption(this, 'nb_occupants')">
+        <i class="fas fa-users"></i>
+        <div class="solar-option-content">
+          <div class="solar-option-label">3 personnes</div>
+        </div>
+        <div class="solar-option-check"></div>
+      </div>
+     
+      <div class="solar-option" data-value="4 et plus" onclick="selectOption(this, 'nb_occupants')">
+        <i class="fas fa-users"></i>
+        <div class="solar-option-content">
+          <div class="solar-option-label">4 personnes et plus</div>
+        </div>
+        <div class="solar-option-check"></div>
+      </div>
+    </div>
+    <input type="hidden" name="nb_occupants" id="nb_occupants">
+    <div class="error-message" id="nb_occupants-error">Veuillez sélectionner une option</div>
+  </div>
+ 
+  <div class="solar-nav">
+    <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+      <i class="fas fa-chevron-left"></i> Précédent
+    </button>
+    <button type="button" class="solar-button solar-next" onclick="validateAndNext('logement_info')">
+      Suivant <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+     
+      <!-- Question 6 - Statut occupation -->
+     
+
+
+      <!-- Question 7 - Équipements -->
+      <div class="solar-question" data-question="6">
+        <h3 class="required"><i class="fas fa-plug"></i> Quels équipements utilisez-vous dans votre logement ?</h3>
+        <p class="question-subtitle">Sélectionnez les équipements présents dans votre logement</p>
+       
+        <div class="equipment-grid">
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-shower"></i> Eau chaude sanitaire électrique
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'eau_chaude_sanitaire', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'eau_chaude_sanitaire', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-fire"></i> Chauffage électrique
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'chauffage_electrique', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'chauffage_electrique', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-utensils"></i> Cuisson électrique
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'cuisson_electrique', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'cuisson_electrique', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-temperature-low"></i> Pompe à chaleur
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'pompe_chaleur', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'pompe_chaleur', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-umbrella-beach"></i> Piscine
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'piscine', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'piscine', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-snowflake"></i> Climatisation
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'climatisation', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'climatisation', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-car-battery"></i> Voiture électrique
+            </div>
+            <div class="equipment-buttons">
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'voiture_electrique', 'Oui')">Oui</button>
+              <button type="button" class="equipment-btn" onclick="selectEquipment(this, 'voiture_electrique', 'Non')">Non</button>
+            </div>
+          </div>
+         
+          <div class="equipment-item">
+            <div class="equipment-title">
+              <i class="fas fa-plus-circle"></i> Autre équipement
+            </div>
+            <input type="text" class="input-field" name="autre_equipement" id="autre_equipement" placeholder="Précisez (facultatif)">
+          </div>
+        </div>
+       
+        <input type="hidden" name="eau_chaude_sanitaire" id="eau_chaude_sanitaire">
+        <input type="hidden" name="chauffage_electrique" id="chauffage_electrique">
+        <input type="hidden" name="cuisson_electrique" id="cuisson_electrique">
+        <input type="hidden" name="pompe_chaleur" id="pompe_chaleur">
+        <input type="hidden" name="piscine" id="piscine">
+        <input type="hidden" name="climatisation" id="climatisation">
+        <input type="hidden" name="voiture_electrique" id="voiture_electrique">
+       
+        <div class="error-message" id="equipements-error">Veuillez répondre à toutes les questions sur les équipements</div>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('equipements')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 8 - Consommation électrique (regroupée) -->
+      <div class="solar-question" data-question="7">
+        <h3 class="required"><i class="fas fa-bolt"></i> Votre consommation électrique</h3>
+       
+        <div class="electricity-section">
+          <h4><i class="fas fa-file-invoice-dollar"></i> Facture d'électricité</h4>
+          <p class="question-subtitle">Indiquez le montant <strong>annuel</strong> en euros</p>
+         
+          <div class="input-with-icon">
+            <input type="number" inputmode="numeric" class="input-field" name="facture_electrique" id="facture_electrique" placeholder="1200" min="0">
+            <div class="input-icon">
+              <i class="fas fa-euro-sign"></i>
+            </div>
+          </div>
+          <div class="error-message" id="facture_electrique-error">Veuillez indiquer le montant de votre facture</div>
+        </div>
+       
+        <div class="electricity-section">
+          <h4><i class="fas fa-plug"></i> Type d'installation électrique et compteur</h4>
+          <p class="question-subtitle">Ces informations se trouvent sur votre compteur électrique</p>
+         
+          <div class="solar-options">
+            <div class="solar-option" data-value="Monophasé" onclick="selectOption(this, 'type_installation')">
+              <i class="fas fa-bolt"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Monophasé</div>
+                <div class="solar-option-description">Installation standard pour la plupart des logements</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+           
+            <div class="solar-option" data-value="Triphasé" onclick="selectOption(this, 'type_installation')">
+              <i class="fas fa-bolt"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Triphasé</div>
+                <div class="solar-option-description">Installation pour les logements avec forte puissance</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+           
+            <div class="solar-option" data-value="Je ne sais pas" onclick="selectOption(this, 'type_installation')">
+              <i class="fas fa-question-circle"></i>
+              <div class="solar-option-content">
+                <div class="solar-option-label">Je ne sais pas</div>
+              </div>
+              <div class="solar-option-check"></div>
+            </div>
+          </div>
+          <div class="error-message" id="type_installation-error">Veuillez sélectionner une option</div>
+        </div>
+       
+        <div class="electricity-section">
+          <h4><i class="fas fa-bolt"></i> Puissance souscrite (kVA)</h4>
+          <p class="question-subtitle">Vous trouverez cette information sur votre facture d'électricité</p>
+         
+          <div class="power-grid">
+            <div class="power-option" onclick="selectPower(this, '3')">
+              <i class="fas fa-bolt power-icon"></i>
+              <span class="power-label">3 kVA</span>
+              <div class="power-check"></div>
+            </div>
+           
+            <div class="power-option" onclick="selectPower(this, '6')">
+              <i class="fas fa-bolt power-icon"></i>
+              <span class="power-label">6 kVA</span>
+              <div class="power-check"></div>
+            </div>
+           
+            <div class="power-option" onclick="selectPower(this, '9')">
+              <i class="fas fa-bolt power-icon"></i>
+              <span class="power-label">9 kVA</span>
+              <div class="power-check"></div>
+            </div>
+           
+            <div class="power-option" onclick="selectPower(this, '12')">
+              <i class="fas fa-bolt power-icon"></i>
+              <span class="power-label">12 kVA</span>
+              <div class="power-check"></div>
+            </div>
+           
+            <div class="power-option" onclick="selectPower(this, '15')">
+              <i class="fas fa-bolt power-icon"></i>
+              <span class="power-label">15 kVA</span>
+              <div class="power-check"></div>
+            </div>
+           
+            <div class="power-option" onclick="selectPower(this, '18')">
+              <i class="fas fa-bolt power-icon"></i>
+              <span class="power-label">18 kVA</span>
+              <div class="power-check"></div>
+            </div>
+           
+            <div class="power-option" onclick="selectPower(this, 'inconnu')">
+              <i class="fas fa-question power-icon"></i>
+              <span class="power-label">Je ne sais pas</span>
+              <div class="power-check"></div>
+            </div>
+          </div>
+          <div class="error-message" id="puissance_souscrite-error">Veuillez sélectionner une option</div>
+        </div>
+       
+        <input type="hidden" name="type_installation" id="type_installation">
+        <input type="hidden" name="puissance_souscrite" id="puissance_souscrite">
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('consommation')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 9 - Nombre de toitures -->
+      <div class="solar-question" data-question="8">
+        <h3 class="required"><i class="fas fa-home"></i> Combien de toitures souhaitez-vous équiper ?</h3>
+        <p class="question-subtitle">Indiquez le nombre de toitures sur lesquelles vous souhaitez installer des panneaux solaires</p>
+       
+        <div class="solar-options">
+          <div class="solar-option" data-value="1" onclick="selectOption(this, 'nb_toitures'); setNumberOfRoofs(1);">
+            <i class="fas fa-home"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">1 toiture</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+         
+          <div class="solar-option" data-value="2" onclick="selectOption(this, 'nb_toitures'); setNumberOfRoofs(2);">
+            <i class="fas fa-home"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">2 toitures</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+         
+          <div class="solar-option" data-value="3" onclick="selectOption(this, 'nb_toitures'); setNumberOfRoofs(3);">
+            <i class="fas fa-home"></i>
+            <div class="solar-option-content">
+              <div class="solar-option-label">3 toitures</div>
+            </div>
+            <div class="solar-option-check"></div>
+          </div>
+        </div>
+       
+        <input type="hidden" name="nb_toitures" id="nb_toitures">
+        <div class="error-message" id="nb_toitures-error">Veuillez sélectionner une option</div>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('nb_toitures')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 10 - Toiture 1 -->
+      <div class="solar-question" data-question="9">
+        <h3 class="required"><i class="fas fa-home"></i> Caractéristiques de la toiture 1</h3>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-compass"></i> Orientation de la toiture
+          </div>
+          <div class="compass-container">
+            <div class="compass-circle">
+              <div class="compass-center"></div>
+              <div class="compass-direction compass-n" onclick="selectRoofOrientation(0, 'Nord')">N</div>
+              <div class="compass-direction compass-ne" onclick="selectRoofOrientation(0, 'Nord-Est')">NE</div>
+              <div class="compass-direction compass-e" onclick="selectRoofOrientation(0, 'Est')">E</div>
+              <div class="compass-direction compass-se" onclick="selectRoofOrientation(0, 'Sud-Est')">SE</div>
+              <div class="compass-direction compass-s" onclick="selectRoofOrientation(0, 'Sud')">S</div>
+              <div class="compass-direction compass-sw" onclick="selectRoofOrientation(0, 'Sud-Ouest')">SO</div>
+              <div class="compass-direction compass-w" onclick="selectRoofOrientation(0, 'Ouest')">O</div>
+              <div class="compass-direction compass-nw" onclick="selectRoofOrientation(0, 'Nord-Ouest')">NO</div>
+            </div>
+          </div>
+          <div class="error-message" id="orientation-0-error">Veuillez sélectionner l'orientation de votre toiture</div>
+        </div>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-angle-up"></i> Inclinaison de la toiture
+          </div>
+          <div class="inclination-options">
+            <div class="inclination-option" onclick="selectRoofInclination(0, 'Plate')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-flat"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">Plate</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(0, '15°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-15"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">15°</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(0, '30°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-30"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">30°</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(0, '45°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-45"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">45°</div>
+            </div>
+          </div>
+          <div class="error-message" id="inclinaison-0-error">Veuillez sélectionner l'inclinaison de votre toiture</div>
+        </div>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-layer-group"></i> Type de couverture
+          </div>
+          <div class="roof-cover-options">
+            <div class="roof-cover-option" onclick="selectRoofCover(0, 'Tuiles')">
+              <div class="roof-cover-icon"><i class="fas fa-th"></i></div>
+              <div class="roof-cover-label">Tuiles</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(0, 'Ardoises')">
+              <div class="roof-cover-icon"><i class="fas fa-square"></i></div>
+              <div class="roof-cover-label">Ardoises</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(0, 'Zinc')">
+              <div class="roof-cover-icon"><i class="fas fa-grip-horizontal"></i></div>
+              <div class="roof-cover-label">Zinc</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(0, 'Bac acier')">
+              <div class="roof-cover-icon"><i class="fas fa-stream"></i></div>
+              <div class="roof-cover-label">Bac acier</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(0, 'Fibro-ciment')">
+              <div class="roof-cover-icon"><i class="fas fa-border-all"></i></div>
+              <div class="roof-cover-label">Fibro-ciment</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(0, 'Autre')">
+              <div class="roof-cover-icon"><i class="fas fa-question"></i></div>
+              <div class="roof-cover-label">Autre</div>
+            </div>
+          </div>
+          <div class="error-message" id="couverture-0-error">Veuillez sélectionner le type de couverture</div>
+        </div>
+       
+        <div class="roof-details-grid">
+          <div class="form-group">
+            <label for="surface_toiture_0" class="required">Surface disponible (m²)</label>
+            <input type="number" class="input-field" id="surface_toiture_0" name="surface_toiture_0" placeholder="30" min="1">
+            <div class="error-message" id="surface_toiture-0-error">Veuillez indiquer la surface disponible</div>
+          </div>
+        </div>
+       
+        <input type="hidden" name="orientation_0" id="orientation_0">
+        <input type="hidden" name="inclinaison_0" id="inclinaison_0">
+        <input type="hidden" name="couverture_0" id="couverture_0">
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('toiture_1')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 11 - Toiture 2 (conditionnelle) -->
+      <div class="solar-question" data-question="10" id="toiture_2_question">
+        <h3 class="required"><i class="fas fa-home"></i> Caractéristiques de la toiture 2</h3>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-compass"></i> Orientation de la toiture
+          </div>
+          <div class="compass-container">
+            <div class="compass-circle">
+              <div class="compass-center"></div>
+              <div class="compass-direction compass-n" onclick="selectRoofOrientation(1, 'Nord')">N</div>
+              <div class="compass-direction compass-ne" onclick="selectRoofOrientation(1, 'Nord-Est')">NE</div>
+              <div class="compass-direction compass-e" onclick="selectRoofOrientation(1, 'Est')">E</div>
+              <div class="compass-direction compass-se" onclick="selectRoofOrientation(1, 'Sud-Est')">SE</div>
+              <div class="compass-direction compass-s" onclick="selectRoofOrientation(1, 'Sud')">S</div>
+              <div class="compass-direction compass-sw" onclick="selectRoofOrientation(1, 'Sud-Ouest')">SO</div>
+              <div class="compass-direction compass-w" onclick="selectRoofOrientation(1, 'Ouest')">O</div>
+              <div class="compass-direction compass-nw" onclick="selectRoofOrientation(1, 'Nord-Ouest')">NO</div>
+            </div>
+          </div>
+          <div class="error-message" id="orientation-1-error">Veuillez sélectionner l'orientation de votre toiture</div>
+        </div>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-angle-up"></i> Inclinaison de la toiture
+          </div>
+          <div class="inclination-options">
+            <div class="inclination-option" onclick="selectRoofInclination(1, 'Plate')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-flat"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">Plate</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(1, '15°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-15"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">15°</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(1, '30°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-30"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">30°</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(1, '45°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-45"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">45°</div>
+            </div>
+          </div>
+          <div class="error-message" id="inclinaison-1-error">Veuillez sélectionner l'inclinaison de votre toiture</div>
+        </div>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-layer-group"></i> Type de couverture
+          </div>
+          <div class="roof-cover-options">
+            <div class="roof-cover-option" onclick="selectRoofCover(1, 'Tuiles')">
+              <div class="roof-cover-icon"><i class="fas fa-th"></i></div>
+              <div class="roof-cover-label">Tuiles</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(1, 'Ardoises')">
+              <div class="roof-cover-icon"><i class="fas fa-square"></i></div>
+              <div class="roof-cover-label">Ardoises</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(1, 'Zinc')">
+              <div class="roof-cover-icon"><i class="fas fa-grip-horizontal"></i></div>
+              <div class="roof-cover-label">Zinc</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(1, 'Bac acier')">
+              <div class="roof-cover-icon"><i class="fas fa-stream"></i></div>
+              <div class="roof-cover-label">Bac acier</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(1, 'Fibro-ciment')">
+              <div class="roof-cover-icon"><i class="fas fa-border-all"></i></div>
+              <div class="roof-cover-label">Fibro-ciment</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(1, 'Autre')">
+              <div class="roof-cover-icon"><i class="fas fa-question"></i></div>
+              <div class="roof-cover-label">Autre</div>
+            </div>
+          </div>
+          <div class="error-message" id="couverture-1-error">Veuillez sélectionner le type de couverture</div>
+        </div>
+       
+        <div class="roof-details-grid">
+          <div class="form-group">
+            <label for="surface_toiture_1" class="required">Surface disponible (m²)</label>
+            <input type="number" class="input-field" id="surface_toiture_1" name="surface_toiture_1" placeholder="30" min="1">
+            <div class="error-message" id="surface_toiture-1-error">Veuillez indiquer la surface disponible</div>
+          </div>
+        </div>
+       
+        <input type="hidden" name="orientation_1" id="orientation_1">
+        <input type="hidden" name="inclinaison_1" id="inclinaison_1">
+        <input type="hidden" name="couverture_1" id="couverture_1">
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('toiture_2')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 12 - Toiture 3 (conditionnelle) -->
+      <div class="solar-question" data-question="11" id="toiture_3_question">
+        <h3 class="required"><i class="fas fa-home"></i> Caractéristiques de la toiture 3</h3>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-compass"></i> Orientation de la toiture
+          </div>
+          <div class="compass-container">
+            <div class="compass-circle">
+              <div class="compass-center"></div>
+              <div class="compass-direction compass-n" onclick="selectRoofOrientation(2, 'Nord')">N</div>
+              <div class="compass-direction compass-ne" onclick="selectRoofOrientation(2, 'Nord-Est')">NE</div>
+              <div class="compass-direction compass-e" onclick="selectRoofOrientation(2, 'Est')">E</div>
+              <div class="compass-direction compass-se" onclick="selectRoofOrientation(2, 'Sud-Est')">SE</div>
+              <div class="compass-direction compass-s" onclick="selectRoofOrientation(2, 'Sud')">S</div>
+              <div class="compass-direction compass-sw" onclick="selectRoofOrientation(2, 'Sud-Ouest')">SO</div>
+              <div class="compass-direction compass-w" onclick="selectRoofOrientation(2, 'Ouest')">O</div>
+              <div class="compass-direction compass-nw" onclick="selectRoofOrientation(2, 'Nord-Ouest')">NO</div>
+            </div>
+          </div>
+          <div class="error-message" id="orientation-2-error">Veuillez sélectionner l'orientation de votre toiture</div>
+        </div>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-angle-up"></i> Inclinaison de la toiture
+          </div>
+          <div class="inclination-options">
+            <div class="inclination-option" onclick="selectRoofInclination(2, 'Plate')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-flat"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">Plate</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(2, '15°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-15"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">15°</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(2, '30°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-30"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">30°</div>
+            </div>
+           
+            <div class="inclination-option" onclick="selectRoofInclination(2, '45°')">
+              <div class="inclination-icon">
+                <div class="house-container">
+                  <div class="house-walls"></div>
+                  <div class="house-roof-45"></div>
+                  <div class="house-door"></div>
+                  <div class="house-window"></div>
+                </div>
+              </div>
+              <div class="inclination-label">45°</div>
+            </div>
+          </div>
+          <div class="error-message" id="inclinaison-2-error">Veuillez sélectionner l'inclinaison de votre toiture</div>
+        </div>
+       
+        <div class="roof-details">
+          <div class="roof-details-title">
+            <i class="fas fa-layer-group"></i> Type de couverture
+          </div>
+          <div class="roof-cover-options">
+            <div class="roof-cover-option" onclick="selectRoofCover(2, 'Tuiles')">
+              <div class="roof-cover-icon"><i class="fas fa-th"></i></div>
+              <div class="roof-cover-label">Tuiles</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(2, 'Ardoises')">
+              <div class="roof-cover-icon"><i class="fas fa-square"></i></div>
+              <div class="roof-cover-label">Ardoises</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(2, 'Zinc')">
+              <div class="roof-cover-icon"><i class="fas fa-grip-horizontal"></i></div>
+              <div class="roof-cover-label">Zinc</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(2, 'Bac acier')">
+              <div class="roof-cover-icon"><i class="fas fa-stream"></i></div>
+              <div class="roof-cover-label">Bac acier</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(2, 'Fibro-ciment')">
+              <div class="roof-cover-icon"><i class="fas fa-border-all"></i></div>
+              <div class="roof-cover-label">Fibro-ciment</div>
+            </div>
+            <div class="roof-cover-option" onclick="selectRoofCover(2, 'Autre')">
+              <div class="roof-cover-icon"><i class="fas fa-question"></i></div>
+              <div class="roof-cover-label">Autre</div>
+            </div>
+          </div>
+          <div class="error-message" id="couverture-2-error">Veuillez sélectionner le type de couverture</div>
+        </div>
+       
+        <div class="roof-details-grid">
+          <div class="form-group">
+            <label for="surface_toiture_2" class="required">Surface disponible (m²)</label>
+            <input type="number" class="input-field" id="surface_toiture_2" name="surface_toiture_2" placeholder="30" min="1">
+            <div class="error-message" id="surface_toiture-2-error">Veuillez indiquer la surface disponible</div>
+          </div>
+        </div>
+       
+        <input type="hidden" name="orientation_2" id="orientation_2">
+        <input type="hidden" name="inclinaison_2" id="inclinaison_2">
+        <input type="hidden" name="couverture_2" id="couverture_2">
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('toiture_3')">
+            Suivant <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question - Calendrier et Disponibilités -->
+      <div class="solar-question" data-question="12">
+        <h3 class="required"><i class="fas fa-calendar-alt"></i> Planification de votre projet</h3>
+ 
+  <div class="form-group">
+    <label for="calendrier_projet" class="required">Quand souhaitez-vous réaliser ce projet ?</label>
+    <div class="calendar-options">
+      <div class="calendar-option" onclick="selectOption(this, 'calendrier_projet'); document.getElementById('calendrier_projet').value = 'Rapidement';">
+        <div class="calendar-icon">
+          <i class="fas fa-stopwatch"></i>
+        </div>
+        <div class="calendar-label">Rapidement</div>
+      </div>
+     
+      <div class="calendar-option" onclick="selectOption(this, 'calendrier_projet'); document.getElementById('calendrier_projet').value = 'Dans les 3 mois';">
+        <div class="calendar-icon">
+          <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="calendar-label">Dans les 3 mois</div>
+      </div>
+     
+      <div class="calendar-option" onclick="selectOption(this, 'calendrier_projet'); document.getElementById('calendrier_projet').value = 'Dans plus de 3 mois';">
+        <div class="calendar-icon">
+          <i class="fas fa-calendar"></i>
+        </div>
+        <div class="calendar-label">Dans plus de 3 mois</div>
+      </div>
+    </div>
+    <input type="hidden" name="calendrier_projet" id="calendrier_projet">
+    <div class="error-message" id="calendrier_projet-error">Veuillez sélectionner une option</div>
+  </div>
+ 
+  <div class="form-group">
+    <label><i class="fas fa-clock"></i> Vos disponibilités pour un rendez-vous téléphonique</label>
+    <p class="question-subtitle">Sélectionnez vos créneaux de disponibilité préférés</p>
+   
+    <div class="availability-options">
+      <div class="availability-option" onclick="toggleAvailability(this, 'matin')">
+        <input type="checkbox" class="availability-checkbox" id="dispo_matin" name="disponibilite[]" value="En semaine, le matin">
+        <i class="fas fa-sun availability-icon"></i>
+        <span class="availability-label">En semaine, le matin</span>
+      </div>
+     
+      <div class="availability-option" onclick="toggleAvailability(this, 'apres_midi')">
+        <input type="checkbox" class="availability-checkbox" id="dispo_apres_midi" name="disponibilite[]" value="En semaine, l'après-midi">
+        <i class="fas fa-cloud-sun availability-icon"></i>
+        <span class="availability-label">En semaine, l'après-midi</span>
+      </div>
+     
+      <div class="availability-option" onclick="toggleAvailability(this, 'soir')">
+        <input type="checkbox" class="availability-checkbox" id="dispo_soir" name="disponibilite[]" value="En semaine, fin de journée">
+        <i class="fas fa-moon availability-icon"></i>
+        <span class="availability-label">En semaine, fin de journée</span>
+      </div>
+     
+      <div class="availability-option" onclick="toggleAvailability(this, 'samedi')">
+        <input type="checkbox" class="availability-checkbox" id="dispo_samedi" name="disponibilite[]" value="Le samedi">
+        <i class="fas fa-calendar-day availability-icon"></i>
+        <span class="availability-label">Le samedi</span>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="solar-nav">
+    <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+      <i class="fas fa-chevron-left"></i> Précédent
+    </button>
+    <button type="button" class="solar-button solar-next" onclick="validateAndNext('calendrier_projet')">
+      Suivant <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+
+      <!-- Question 15 - Coordonnées -->
+      <div class="solar-question" data-question="13">
+        <h3 class="required"><i class="fas fa-user"></i> Vos informations personnelles</h3>
+       
+        <div class="personal-info-grid">
+          <div class="form-group">
+            <label for="civilite" class="required">Civilité</label>
+            <select class="select-field" id="civilite" name="civilite">
+              <option value="">Sélectionnez</option>
+              <option value="M.">M.</option>
+              <option value="Mme">Mme</option>
+            </select>
+            <div class="error-message" id="civilite-error">Veuillez sélectionner une civilité</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="prenom" class="required">Prénom</label>
+            <input type="text" class="input-field" id="prenom" name="prenom" placeholder="Votre prénom">
+            <div class="error-message" id="prenom-error">Veuillez indiquer votre prénom</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="nom" class="required">Nom</label>
+            <input type="text" class="input-field" id="nom" name="nom" placeholder="Votre nom">
+            <div class="error-message" id="nom-error">Veuillez indiquer votre nom</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="telephone" class="required">Téléphone</label>
+            <input type="tel" class="input-field" id="telephone" name="telephone" placeholder="Votre numéro de téléphone">
+            <div class="error-message" id="telephone-error">Veuillez indiquer un numéro de téléphone valide</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="email" class="required">Email</label>
+            <input type="email" class="input-field email-field" id="email" name="email" placeholder="Votre adresse email">
+            <div class="error-message" id="email-error">Veuillez indiquer une adresse email valide</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="adresse" class="required">Adresse</label>
+            <textarea class="input-field address-field" id="adresse" name="adresse" placeholder="Votre adresse complète"></textarea>
+            <div class="error-message" id="adresse-error">Veuillez indiquer votre adresse</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="code_postal" class="required">Code postal</label>
+            <input type="text" class="input-field" id="code_postal" name="code_postal" placeholder="Code postal">
+            <div class="error-message" id="code_postal-error">Veuillez indiquer un code postal valide</div>
+          </div>
+         
+          <div class="form-group">
+            <label for="ville" class="required">Ville</label>
+            <input type="text" class="input-field" id="ville" name="ville" placeholder="Ville">
+            <div class="error-message" id="ville-error">Veuillez indiquer votre ville</div>
+          </div>
+        </div>
+       
+        <div class="rgpd-container">
+          <input type="checkbox" id="rgpd" name="rgpd">
+          <div class="rgpd-text">
+            J'accepte que mes données personnelles soient collectées afin d'être recontacté pour mon projet de panneaux solaires. Pour en savoir plus sur la gestion de vos données et vos droits, consultez notre <a href="https://solisinnov.fr/politique-de-confidentialite/" target="_blank">politique de confidentialité</a>.
+          </div>
+        </div>
+        <div class="error-message" id="rgpd-error">Vous devez accepter la politique de confidentialité</div>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="validateAndNext('coordonnees')">
+            Voir le récapitulatif <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 16 - Commentaire -->
+      <div class="solar-question" data-question="14">
+        <h3><i class="fas fa-comment"></i> Commentaire (facultatif)</h3>
+        <p class="question-subtitle">Avez-vous des informations complémentaires à nous communiquer ?</p>
+       
+        <textarea class="comment-field" id="commentaire" name="commentaire" placeholder="Votre commentaire ou question..."></textarea>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next" onclick="nextQuestion()">
+            Voir le récapitulatif <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Question 17 - Récapitulatif -->
+      <div class="solar-question" data-question="15">
+        <h3><i class="fas fa-clipboard-check"></i> Récapitulatif de votre demande</h3>
+        <p class="question-subtitle">Vérifiez les informations avant de soumettre votre demande</p>
+       
+        <div class="summary-section">
+          <h4><i class="fas fa-home"></i> Votre logement</h4>
+          <div class="summary-item">
+            <span class="summary-label">Type de projet :</span>
+            <span class="summary-value" id="summary-type_projet">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Type de logement :</span>
+            <span class="summary-value" id="summary-type_logement">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Ancienneté du logement :</span>
+            <span class="summary-value" id="summary-anciennete_logement">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Surface habitable :</span>
+            <span class="summary-value" id="summary-surface">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Nombre d'occupants :</span>
+            <span class="summary-value" id="summary-nb_occupants">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Statut d'occupation :</span>
+            <span class="summary-value" id="summary-statut_occupation">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Calendrier du projet :</span>
+            <span class="summary-value" id="summary-calendrier_projet">-</span>
+          </div>
+        </div>
+       
+        <div class="summary-section">
+          <h4><i class="fas fa-plug"></i> Votre consommation</h4>
+          <div class="summary-item">
+            <span class="summary-label">Équipements :</span>
+            <span class="summary-value" id="summary-equipements">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Facture électrique annuelle :</span>
+            <span class="summary-value" id="summary-facture_electrique">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Type d'installation :</span>
+            <span class="summary-value" id="summary-type_installation">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Puissance souscrite :</span>
+            <span class="summary-value" id="summary-puissance_souscrite">-</span>
+          </div>
+        </div>
+       
+        <div class="summary-section">
+          <h4><i class="fas fa-solar-panel"></i> Vos toitures</h4>
+          <div id="summary-toitures">
+            <!-- Les toitures seront ajoutées ici dynamiquement -->
+          </div>
+        </div>
+       
+        <div class="summary-section">
+          <h4><i class="fas fa-clock"></i> Vos disponibilités</h4>
+          <div class="summary-item">
+            <span class="summary-value" id="summary-disponibilites">-</span>
+          </div>
+        </div>
+       
+        <div class="summary-section">
+          <h4><i class="fas fa-user"></i> Vos coordonnées</h4>
+          <div class="summary-item">
+            <span class="summary-label">Nom complet :</span>
+            <span class="summary-value" id="summary-nom_complet">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Téléphone :</span>
+            <span class="summary-value" id="summary-telephone">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Email :</span>
+            <span class="summary-value" id="summary-email">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Adresse :</span>
+            <span class="summary-value" id="summary-adresse">-</span>
+          </div>
+        </div>
+       
+        <div class="solar-nav">
+          <button type="button" class="solar-button solar-prev" onclick="previousQuestion()">
+            <i class="fas fa-chevron-left"></i> Précédent
+          </button>
+          <button type="button" class="solar-button solar-next pulse" id="submit-button" onclick="submitForm()">
+            Envoyer ma demande <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="notification" id="notification">
+    <div class="notification-content">
+      <div class="notification-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="notification-message" id="notification-message"></div>
+    </div>
+  </div>
+
+
+  <div class="loader-container" id="loader-container">
+    <div class="loader"></div>
+    <div class="loader-text">Envoi en cours...</div>
+  </div>
+
+
+  <div class="confirmation-message" id="confirmation-message">
+    <h3><i class="fas fa-check-circle"></i> Demande envoyée avec succès</h3>
+    <p>Votre demande de devis a bien été transmise. Un expert Solisinnov vous contactera très prochainement.</p>
+    <button class="confirmation-button" onclick="closeConfirmation()">Fermer</button>
+  </div>
+</div>
+
+
+<script>
+// Variables globales
+let currentQuestion = 1;
+let totalQuestions = 15; // Mis à jour de 17 à 15 car on a fusionné 2 paires de questions
+let roofs = []; // Tableau pour stocker les toitures
+let numberOfRoofs = 1; // Nombre de toitures par défaut
+
+
+// Initialisation au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Initialisation du formulaire...");
+  updateProgress();
+
+
+  // Initialiser les écouteurs d'événements pour les champs numériques
+  initNumericInputs();
+
+
+  // Masquer les questions de toiture conditionnelles par défaut
+  document.getElementById('toiture_2_question').style.display = 'none';
+  document.getElementById('toiture_3_question').style.display = 'none';
+
+
+  // Initialiser les toitures
+  initializeRoofs();
+ 
+  // Ajouter des écouteurs d'événements directs pour les éléments de toiture
+  initializeRoofElements();
+});
+
+
+// Fonction pour initialiser les éléments de toiture
+function initializeRoofElements() {
+  // Orientation
+  document.querySelectorAll('.compass-direction').forEach(direction => {
+    direction.addEventListener('click', function() {
+      const roofIndex = parseInt(this.closest('.solar-question').getAttribute('data-question')) - 9;
+      const orientation = this.textContent;
+      selectRoofOrientation(roofIndex, orientation);
+    });
+  });
+ 
+  // Inclinaison
+  document.querySelectorAll('.inclination-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const roofIndex = parseInt(this.closest('.solar-question').getAttribute('data-question')) - 9;
+      const inclinaison = this.querySelector('.inclination-label').textContent;
+      selectRoofInclination(roofIndex, inclinaison);
+    });
+  });
+ 
+  // Couverture
+  document.querySelectorAll('.roof-cover-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const roofIndex = parseInt(this.closest('.solar-question').getAttribute('data-question')) - 9;
+      const couverture = this.querySelector('.roof-cover-label').textContent;
+      selectRoofCover(roofIndex, couverture);
+    });
+  });
+}
+
+
+// Fonction pour initialiser les toitures
+function initializeRoofs() {
+  roofs = [];
+  for (let i = 0; i < 3; i++) {
+    roofs.push({
+      orientation: '',
+      inclinaison: '',
+      couverture: '',
+      surface: ''
+    });
+  }
+}
+
+
+// Fonction pour définir le nombre de toitures
+function setNumberOfRoofs(number) {
+  console.log("Nombre de toitures sélectionné:", number);
+  numberOfRoofs = number;
+
+
+  // Ajuster le nombre total de questions en fonction du nombre de toitures
+  if (number === 1) {
+    totalQuestions = 15; // Réduit de 17 à 15 car on a fusionné 2 paires de questions
+    document.getElementById('toiture_2_question').style.display = 'none';
+    document.getElementById('toiture_3_question').style.display = 'none';
+  } else if (number === 2) {
+    totalQuestions = 16; // Réduit de 18 à 16
+    document.getElementById('toiture_2_question').style.display = 'block';
+    document.getElementById('toiture_3_question').style.display = 'none';
+  } else if (number === 3) {
+    totalQuestions = 17; // Réduit de 19 à 17
+    document.getElementById('toiture_2_question').style.display = 'block';
+    document.getElementById('toiture_3_question').style.display = 'block';
+  }
+
+
+  // Mettre à jour la progression
+  updateProgress();
+}
+
+
+// Fonction pour initialiser les écouteurs d'événements pour les champs numériques
+function initNumericInputs() {
+  const numericInputs = document.querySelectorAll('input[type="number"]');
+  numericInputs.forEach(input => {
+    input.addEventListener('input', function() {
+      validateNumericInput(this);
+    });
+  });
+}
+
+
+// Fonction pour valider les champs numériques
+function validateNumericInput(input) {
+  const value = input.value;
+  const min = parseInt(input.getAttribute('min'));
+
+
+  if (value === '' || isNaN(value) || parseInt(value) < min) {
+    input.classList.add('invalid');
+    return false;
+  } else {
+    input.classList.remove('invalid');
+    return true;
+  }
+}
+
+
+// Fonction pour sélectionner une option
+function selectOption(element, fieldId) {
+  console.log("Sélection d'option pour", fieldId);
+
+
+  // Désélectionner toutes les options
+  const options = element.parentElement.querySelectorAll('.solar-option');
+  options.forEach(option => {
+    option.classList.remove('selected');
+  });
+
+
+  // Sélectionner l'option cliquée
+  element.classList.add('selected');
+
+
+  // Mettre à jour le champ caché
+  const value = element.getAttribute('data-value');
+  document.getElementById(fieldId).value = value;
+  console.log(`Option sélectionnée pour ${fieldId}: ${value}`);
+
+
+  // Masquer le message d'erreur
+  const errorElement = document.getElementById(`${fieldId}-error`);
+  if (errorElement) {
+    errorElement.classList.remove('visible');
+  }
+}
+
+
+// Fonction pour sélectionner un équipement
+function selectEquipment(element, fieldId, value) {
+  console.log("Sélection d'équipement pour", fieldId, ":", value);
+
+
+  // Désélectionner tous les boutons dans ce groupe
+  const buttons = element.parentElement.querySelectorAll('.equipment-btn');
+  buttons.forEach(btn => {
+    btn.classList.remove('selected');
+  });
+
+
+  // Sélectionner le bouton cliqué
+  element.classList.add('selected');
+
+
+  // Mettre à jour le champ caché
+  document.getElementById(fieldId).value = value;
+}
+
+
+// Fonction pour sélectionner une puissance
+function selectPower(element, value) {
+  console.log("Sélection de puissance:", value);
+
+
+  // Désélectionner toutes les options
+  const options = document.querySelectorAll('.power-option');
+  options.forEach(option => {
+    option.classList.remove('selected');
+  });
+
+
+  // Sélectionner l'option cliquée
+  element.classList.add('selected');
+
+
+  // Mettre à jour le champ caché
+  let displayValue = value;
+  if (value !== 'inconnu') {
+    displayValue = value + ' kVA';
+  } else {
+    displayValue = 'Je ne sais pas';
+  }
+  document.getElementById('puissance_souscrite').value = displayValue;
+  console.log(`Puissance sélectionnée: ${displayValue}`);
+
+
+  // Masquer le message d'erreur
+  const errorElement = document.getElementById('puissance_souscrite-error');
+  if (errorElement) {
+    errorElement.classList.remove('visible');
+  }
+}
+
+
+// Fonction pour sélectionner l'orientation du toit
+function selectRoofOrientation(roofIndex, orientation) {
+  console.log("Sélection d'orientation pour toiture", roofIndex, ":", orientation);
+
+
+  // Mettre à jour l'orientation de la toiture
+  roofs[roofIndex].orientation = orientation;
+  document.getElementById(`orientation_${roofIndex}`).value = orientation;
+
+
+  // Mettre à jour l'affichage
+  const directions = document.querySelectorAll(`.solar-question[data-question="${9 + roofIndex}"] .compass-direction`);
+  directions.forEach(dir => {
+    dir.classList.remove('selected');
+  });
+
+
+  // Trouver la direction correspondante et la sélectionner
+  const directionMap = {
+    'N': '.compass-n', 'Nord': '.compass-n',
+    'NE': '.compass-ne', 'Nord-Est': '.compass-ne',
+    'E': '.compass-e', 'Est': '.compass-e',
+    'SE': '.compass-se', 'Sud-Est': '.compass-se',
+    'S': '.compass-s', 'Sud': '.compass-s',
+    'SO': '.compass-sw', 'Sud-Ouest': '.compass-sw',
+    'O': '.compass-w', 'Ouest': '.compass-w',
+    'NO': '.compass-nw', 'Nord-Ouest': '.compass-nw'
+  };
+
+
+  const selector = directionMap[orientation];
+  if (selector) {
+    const selectedElement = document.querySelector(`.solar-question[data-question="${9 + roofIndex}"] ${selector}`);
+    if (selectedElement) {
+      selectedElement.classList.add('selected');
+    }
+  }
+
+
+  // Masquer le message d'erreur
+  const errorElement = document.getElementById(`orientation-${roofIndex}-error`);
+  if (errorElement) {
+    errorElement.classList.remove('visible');
+  }
+}
+
+
+// Fonction pour sélectionner l'inclinaison du toit
+function selectRoofInclination(roofIndex, inclinaison) {
+  console.log("Sélection d'inclinaison pour toiture", roofIndex, ":", inclinaison);
+
+
+  // Mettre à jour l'inclinaison de la toiture
+  roofs[roofIndex].inclinaison = inclinaison;
+  document.getElementById(`inclinaison_${roofIndex}`).value = inclinaison;
+
+
+  // Mettre à jour l'affichage
+  const options = document.querySelectorAll(`.solar-question[data-question="${9 + roofIndex}"] .inclination-option`);
+  options.forEach(option => {
+    option.classList.remove('selected');
+  });
+
+
+  // Trouver l'option correspondante et la sélectionner
+  options.forEach(option => {
+    const label = option.querySelector('.inclination-label');
+    if (label && label.textContent === inclinaison) {
+      option.classList.add('selected');
+    }
+  });
+
+
+  // Masquer le message d'erreur
+  const errorElement = document.getElementById(`inclinaison-${roofIndex}-error`);
+  if (errorElement) {
+    errorElement.classList.remove('visible');
+  }
+}
+
+
+// Fonction pour sélectionner le type de couverture
+function selectRoofCover(roofIndex, couverture) {
+  console.log("Sélection de couverture pour toiture", roofIndex, ":", couverture);
+
+
+  // Mettre à jour la couverture de la toiture
+  roofs[roofIndex].couverture = couverture;
+  document.getElementById(`couverture_${roofIndex}`).value = couverture;
+
+
+  // Mettre à jour l'affichage
+  const options = document.querySelectorAll(`.solar-question[data-question="${9 + roofIndex}"] .roof-cover-option`);
+  options.forEach(option => {
+    option.classList.remove('selected');
+  });
+
+
+  // Trouver l'option correspondante et la sélectionner
+  options.forEach(option => {
+    const label = option.querySelector('.roof-cover-label');
+    if (label && label.textContent === couverture) {
+      option.classList.add('selected');
+    }
+  });
+
+
+  // Masquer le message d'erreur
+  const errorElement = document.getElementById(`couverture-${roofIndex}-error`);
+  if (errorElement) {
+    errorElement.classList.remove('visible');
+  }
+}
+
+
+// Fonction pour gérer les disponibilités
+function toggleAvailability(element, id) {
+  const checkbox = element.querySelector('.availability-checkbox');
+  checkbox.checked = !checkbox.checked;
+ 
+  if (checkbox.checked) {
+    element.classList.add('selected');
+  } else {
+    element.classList.remove('selected');
+  }
+}
+
+
+// Fonction pour valider et passer à la question suivante
+function validateAndNext(fieldType) {
+  console.log("Validation pour:", fieldType);
+  let isValid = true;
+
+
+  switch(fieldType) {
+    case 'type_projet':
+      isValid = validateField('type_projet');
+      break;
+   
+    case 'logement_complet':
+      isValid = validateField('type_logement') &&
+                validateField('anciennete_logement') &&
+                validateField('statut_occupation');
+      break;
+   
+    case 'logement_info':
+      isValid = validateNumericField('surface') && validateField('nb_occupants');
+      break;
+   
+    case 'equipements':
+      isValid = validateEquipments();
+      break;
+   
+    case 'consommation':
+      isValid = validateNumericField('facture_electrique') &&
+                validateField('type_installation') &&
+                validateField('puissance_souscrite');
+      break;
+   
+    case 'toiture_1':
+      isValid = validateRoof(0);
+      break;
+   
+    case 'toiture_2':
+      isValid = validateRoof(1);
+      break;
+   
+    case 'toiture_3':
+      isValid = validateRoof(2);
+      break;
+   
+    case 'calendrier_projet':
+      isValid = validateField('calendrier_projet');
+      break;
+   
+    case 'coordonnees':
+      isValid = validateCoordinates();
+      if (isValid) {
+        fillSummary();
+      }
+      break;
+  }
+
+
+  if (isValid) {
+    console.log("Validation réussie, passage à la question suivante");
+    nextQuestion();
+  } else {
+    console.log("Validation échouée");
+  }
+}
+
+
+// Fonction pour valider un champ
+function validateField(fieldId) {
+  const field = document.getElementById(fieldId);
+  const errorElement = document.getElementById(`${fieldId}-error`);
+
+
+  if (!field.value) {
+    errorElement.classList.add('visible');
+    console.log(`Erreur: ${fieldId} non rempli`);
+    return false;
+  } else {
+    errorElement.classList.remove('visible');
+    return true;
+  }
+}
+
+
+// Fonction pour valider un champ numérique
+function validateNumericField(fieldId) {
+  const field = document.getElementById(fieldId);
+  const errorElement = document.getElementById(`${fieldId}-error`);
+  const min = parseInt(field.getAttribute('min') || 0);
+
+
+  if (!field.value || isNaN(field.value) || parseInt(field.value) < min) {
+    errorElement.classList.add('visible');
+    console.log(`Erreur: ${fieldId} non valide`);
+    return false;
+  } else {
+    errorElement.classList.remove('visible');
+    return true;
+  }
+}
+
+
+// Fonction pour valider les équipements
+function validateEquipments() {
+  const requiredEquipments = [
+    'eau_chaude_sanitaire',
+    'chauffage_electrique',
+    'cuisson_electrique',
+    'pompe_chaleur',
+    'piscine',
+    'climatisation',
+    'voiture_electrique'
+  ];
+
+
+  let isValid = true;
+
+
+  for (const equipment of requiredEquipments) {
+    if (!document.getElementById(equipment).value) {
+      isValid = false;
+      console.log(`Erreur: ${equipment} non rempli`);
+      break;
+    }
+  }
+
+
+  const errorElement = document.getElementById('equipements-error');
+
+
+  if (!isValid) {
+    errorElement.classList.add('visible');
+    return false;
+  } else {
+    errorElement.classList.remove('visible');
+    return true;
+  }
+}
+
+
+// Fonction pour valider une toiture
+function validateRoof(roofIndex) {
+  console.log(`Validation de la toiture ${roofIndex}`);
+  let isValid = true;
+
+
+  // Vérifier l'orientation
+  if (!document.getElementById(`orientation_${roofIndex}`).value) {
+    document.getElementById(`orientation-${roofIndex}-error`).classList.add('visible');
+    isValid = false;
+    console.log(`Erreur: orientation de la toiture ${roofIndex} non définie`);
+  } else {
+    document.getElementById(`orientation-${roofIndex}-error`).classList.remove('visible');
+  }
+
+
+  // Vérifier l'inclinaison
+  if (!document.getElementById(`inclinaison_${roofIndex}`).value) {
+    document.getElementById(`inclinaison-${roofIndex}-error`).classList.add('visible');
+    isValid = false;
+    console.log(`Erreur: inclinaison de la toiture ${roofIndex} non définie`);
+  } else {
+    document.getElementById(`inclinaison-${roofIndex}-error`).classList.remove('visible');
+  }
+
+
+  // Vérifier la couverture
+  if (!document.getElementById(`couverture_${roofIndex}`).value) {
+    document.getElementById(`couverture-${roofIndex}-error`).classList.add('visible');
+    isValid = false;
+    console.log(`Erreur: couverture de la toiture ${roofIndex} non définie`);
+  } else {
+    document.getElementById(`couverture-${roofIndex}-error`).classList.remove('visible');
+  }
+
+
+  // Vérifier la surface
+  const surfaceField = document.getElementById(`surface_toiture_${roofIndex}`);
+  if (!surfaceField.value || isNaN(surfaceField.value) || parseInt(surfaceField.value) < 1) {
+    document.getElementById(`surface_toiture-${roofIndex}-error`).classList.add('visible');
+    isValid = false;
+    console.log(`Erreur: surface de la toiture ${roofIndex} non valide`);
+  } else {
+    document.getElementById(`surface_toiture-${roofIndex}-error`).classList.remove('visible');
+    // Mettre à jour la surface dans l'objet toiture
+    roofs[roofIndex].surface = surfaceField.value;
+  }
+
+
+  return isValid;
+}
+
+
+// Fonction pour valider les coordonnées
+function validateCoordinates() {
+  const fields = [
+    'civilite',
+    'prenom',
+    'nom',
+    'telephone',
+    'email',
+    'adresse',
+    'code_postal',
+    'ville'
+  ];
+
+
+  let isValid = true;
+
+
+  // Vérifier tous les champs
+  for (const field of fields) {
+    if (!validateField(field)) {
+      isValid = false;
+    }
+  }
+
+
+  // Vérifier le format de l'email
+  const emailField = document.getElementById('email');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(emailField.value)) {
+    document.getElementById('email-error').classList.add('visible');
+    isValid = false;
+    console.log("Erreur: format d'email invalide");
+  }
+
+
+  // Vérifier le format du téléphone
+  const phoneField = document.getElementById('telephone');
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(phoneField.value.replace(/\s/g, ''))) {
+    document.getElementById('telephone-error').classList.add('visible');
+    isValid = false;
+    console.log("Erreur: format de téléphone invalide");
+  }
+
+
+  // Vérifier l'acceptation RGPD
+  const rgpdCheckbox = document.getElementById('rgpd');
+  if (!rgpdCheckbox.checked) {
+    document.getElementById('rgpd-error').classList.add('visible');
+    isValid = false;
+    console.log("Erreur: RGPD non accepté");
+  } else {
+    document.getElementById('rgpd-error').classList.remove('visible');
+  }
+
+
+  return isValid;
+}
+
+
+// Fonction pour remplir le récapitulatif
+function fillSummary() {
+  console.log("Remplissage du récapitulatif");
+
+
+  // Informations sur le logement
+  document.getElementById('summary-type_projet').textContent = document.getElementById('type_projet').value;
+  document.getElementById('summary-type_logement').textContent = document.getElementById('type_logement').value;
+  document.getElementById('summary-anciennete_logement').textContent = document.getElementById('anciennete_logement').value;
+  document.getElementById('summary-surface').textContent = document.getElementById('surface').value + ' m²';
+  document.getElementById('summary-nb_occupants').textContent = document.getElementById('nb_occupants').value;
+  document.getElementById('summary-statut_occupation').textContent = document.getElementById('statut_occupation').value;
+  document.getElementById('summary-calendrier_projet').textContent = document.getElementById('calendrier_projet').value;
+
+
+  // Informations sur la consommation
+  const equipements = [];
+  if (document.getElementById('eau_chaude_sanitaire').value === 'Oui') equipements.push('Eau chaude sanitaire électrique');
+  if (document.getElementById('chauffage_electrique').value === 'Oui') equipements.push('Chauffage électrique');
+  if (document.getElementById('cuisson_electrique').value === 'Oui') equipements.push('Cuisson électrique');
+  if (document.getElementById('pompe_chaleur').value === 'Oui') equipements.push('Pompe à chaleur');
+  if (document.getElementById('piscine').value === 'Oui') equipements.push('Piscine');
+  if (document.getElementById('climatisation').value === 'Oui') equipements.push('Climatisation');
+  if (document.getElementById('voiture_electrique').value === 'Oui') equipements.push('Voiture électrique');
+ 
+  const autreEquipement = document.getElementById('autre_equipement').value;
+  if (autreEquipement) equipements.push(autreEquipement);
+ 
+  document.getElementById('summary-equipements').textContent = equipements.join(', ') || 'Aucun';
+  document.getElementById('summary-facture_electrique').textContent = document.getElementById('facture_electrique').value + ' €/an';
+  document.getElementById('summary-type_installation').textContent = document.getElementById('type_installation').value;
+  document.getElementById('summary-puissance_souscrite').textContent = document.getElementById('puissance_souscrite').value;
+
+
+  // Informations sur les toitures
+  const toituresContainer = document.getElementById('summary-toitures');
+  toituresContainer.innerHTML = '';
+
+
+  for (let i = 0; i < numberOfRoofs; i++) {
+    const toitureDiv = document.createElement('div');
+    toitureDiv.className = 'summary-item';
+   
+    const surface = document.getElementById(`surface_toiture_${i}`).value;
+    const orientation = document.getElementById(`orientation_${i}`).value;
+    const inclinaison = document.getElementById(`inclinaison_${i}`).value;
+    const couverture = document.getElementById(`couverture_${i}`).value;
+   
+    toitureDiv.innerHTML = `
+      <span class="summary-label">Toiture ${i+1}:</span>
+      <span class="summary-value">
+        ${surface} m² - Orientation: ${orientation} - Inclinaison: ${inclinaison} - Couverture: ${couverture}
+      </span>
+    `;
+   
+    toituresContainer.appendChild(toitureDiv);
+  }
+
+
+  // Informations sur les disponibilités
+  const disponibilites = [];
+  const dispoCheckboxes = document.querySelectorAll('input[name="disponibilite[]"]:checked');
+  dispoCheckboxes.forEach(checkbox => {
+    disponibilites.push(checkbox.value);
+  });
+  document.getElementById('summary-disponibilites').textContent = disponibilites.join(', ') || 'Aucune disponibilité spécifiée';
+
+
+  // Informations sur les coordonnées
+  const civilite = document.getElementById('civilite').value;
+  const prenom = document.getElementById('prenom').value;
+  const nom = document.getElementById('nom').value;
+  document.getElementById('summary-nom_complet').textContent = `${civilite} ${prenom} ${nom}`;
+  document.getElementById('summary-telephone').textContent = document.getElementById('telephone').value;
+  document.getElementById('summary-email').textContent = document.getElementById('email').value;
+ 
+  const adresse = document.getElementById('adresse').value;
+  const codePostal = document.getElementById('code_postal').value;
+  const ville = document.getElementById('ville').value;
+  document.getElementById('summary-adresse').textContent = `${adresse}, ${codePostal} ${ville}`;
+}
+
+
+// Fonction pour afficher une notification
+function showNotification(message) {
+  const notification = document.getElementById('notification');
+  const notificationMessage = document.getElementById('notification-message');
+ 
+  notificationMessage.textContent = message;
+  notification.classList.add('show');
+ 
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+
+// Fonction pour fermer le message de confirmation
+function closeConfirmation() {
+  document.getElementById('confirmation-message').style.display = 'none';
+}
+
+
+// Fonction pour soumettre le formulaire
+function submitForm() {
+  console.log("Soumission du formulaire");
+ 
+  // Afficher le loader
+  document.getElementById('loader-container').style.display = 'flex';
+ 
+  // Récupérer le formulaire
+  const form = document.getElementById('solar-form');
+ 
+  // Créer un objet FormData
+  const formData = new FormData(form);
+ 
+  // Ajouter des informations supplémentaires
+  formData.append('form-name', 'Demande de devis panneaux solaires');
+  formData.append('date', new Date().toLocaleString());
+ 
+  // Envoyer les données via fetch
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    console.log("Réponse reçue:", response);
+   
+    // Masquer le loader
+    document.getElementById('loader-container').style.display = 'none';
+   
+    if (response.ok) {
+      console.log("Formulaire envoyé avec succès");
+     
+      // Afficher le message de confirmation
+      document.getElementById('confirmation-message').style.display = 'block';
+     
+      // Faire défiler vers le haut
+      window.scrollTo(0, 0);
+    } else {
+      console.error("Erreur lors de l'envoi du formulaire");
+      showNotification("Une erreur est survenue. Veuillez réessayer.");
+    }
+  })
+  .catch(error => {
+    console.error("Erreur:", error);
+   
+    // Masquer le loader
+    document.getElementById('loader-container').style.display = 'none';
+   
+    // Afficher une notification d'erreur
+    showNotification("Une erreur est survenue. Veuillez réessayer.");
+  });
+}
+
+
+// Fonction pour passer à la question suivante
+function nextQuestion() {
+  // Masquer la question actuelle
+  const currentQuestionElement = document.querySelector(`.solar-question[data-question="${currentQuestion}"]`);
+  currentQuestionElement.classList.remove('active');
+
+
+  // Déterminer la prochaine question en fonction du nombre de toitures
+  let nextQuestionNumber = currentQuestion + 1;
+
+
+  // Ajuster en fonction du regroupement des questions
+  if (currentQuestion === 2) {
+    // Après le groupe logement, passer directement à la question 4 (surface et occupants)
+    nextQuestionNumber = 4;
+  }
+  else if (numberOfRoofs === 1 && currentQuestion === 9) {
+    nextQuestionNumber = 12; // Passer à Calendrier et Disponibilités
+  }
+  else if (numberOfRoofs === 2 && currentQuestion === 10) {
+    nextQuestionNumber = 12; // Passer à Calendrier et Disponibilités
+  }
+  else if (numberOfRoofs === 3 && currentQuestion === 11) {
+    nextQuestionNumber = 12; // Passer à Calendrier et Disponibilités
+  }
+
+
+  // Mettre à jour la question actuelle
+  currentQuestion = nextQuestionNumber;
+
+
+  // Afficher la nouvelle question
+  const nextQuestionElement = document.querySelector(`.solar-question[data-question="${currentQuestion}"]`);
+  nextQuestionElement.classList.add('active');
+
+
+  // Mettre à jour la progression
+  updateProgress();
+
+
+  // Faire défiler vers le haut
+  document.getElementById('form-container').scrollTop = 0;
+
+
+  console.log(`Passage à la question ${currentQuestion}`);
+}
+
+
+// Fonction pour revenir à la question précédente
+function previousQuestion() {
+  // Masquer la question actuelle
+  const currentQuestionElement = document.querySelector(`.solar-question[data-question="${currentQuestion}"]`);
+  currentQuestionElement.classList.remove('active');
+
+
+  // Déterminer la question précédente en fonction du nombre de toitures
+  let prevQuestionNumber = currentQuestion - 1;
+
+
+  // Ajuster en fonction du regroupement des questions
+  if (currentQuestion === 4) {
+    // Avant la question 4 (surface et occupants), revenir à la question 2 (groupe logement)
+    prevQuestionNumber = 2;
+  }
+  else if (currentQuestion === 12) {
+    // Avant Calendrier et Disponibilités, revenir à la dernière toiture
+    if (numberOfRoofs === 1) {
+      prevQuestionNumber = 9;
+    } else if (numberOfRoofs === 2) {
+      prevQuestionNumber = 10;
+    } else if (numberOfRoofs === 3) {
+      prevQuestionNumber = 11;
+    }
+  }
+
+
+  // Mettre à jour la question actuelle
+  currentQuestion = prevQuestionNumber;
+
+
+  // Afficher la nouvelle question
+  const prevQuestionElement = document.querySelector(`.solar-question[data-question="${currentQuestion}"]`);
+  prevQuestionElement.classList.add('active');
+
+
+  // Mettre à jour la progression
+  updateProgress();
+
+
+  // Faire défiler vers le haut
+  document.getElementById('form-container').scrollTop = 0;
+
+
+  console.log(`Retour à la question ${currentQuestion}`);
+}
+
+
+// Fonction pour mettre à jour la progression
+function updateProgress() {
+  const progressFill = document.getElementById('progress-fill');
+  const progressPercent = document.getElementById('progress-percent');
+  const progressSteps = document.getElementById('progress-steps');
+
+
+  // Ajuster le nombre total de questions en fonction des regroupements
+  const adjustedTotalQuestions = totalQuestions - 2; // -2 car on a regroupé 3 questions en 1
+
+
+  // Calculer le pourcentage de progression
+  const percent = Math.round((currentQuestion / adjustedTotalQuestions) * 100);
+
+
+  // Mettre à jour la barre de progression
+  progressFill.style.width = `${percent}%`;
+  progressPercent.textContent = `${percent}%`;
+  progressSteps.textContent = `Étape ${currentQuestion}/${adjustedTotalQuestions}`;
+
+
+  // Mettre à jour les étapes
+  const steps = document.querySelectorAll('.progress-step');
+  steps.forEach(step => {
+    const stepNumber = parseInt(step.getAttribute('data-step'));
+    step.classList.remove('active', 'completed');
+   
+    if (stepNumber < currentQuestion) {
+      step.classList.add('completed');
+    } else if (stepNumber === Math.min(5, Math.ceil(currentQuestion / 3))) {
+      step.classList.add('active');
+    }
+  });
+}
+
+
+// Fonction pour déboguer les sélections de toiture
+function debugRoofSelections() {
+  console.log("État actuel des toitures:", roofs);
+ 
+  // Vérifier que les fonctions de sélection sont correctement attachées
+  const compassDirections = document.querySelectorAll('.compass-direction');
+  compassDirections.forEach(dir => {
+    dir.addEventListener('click', function() {
+      const roofIndex = parseInt(this.closest('.solar-question').getAttribute('data-question')) - 9;
+      const orientation = this.textContent;
+      console.log(`Clic sur orientation: ${orientation} pour toiture ${roofIndex}`);
+      selectRoofOrientation(roofIndex, orientation);
+    });
+  });
+ 
+  const inclinationOptions = document.querySelectorAll('.inclination-option');
+  inclinationOptions.forEach(opt => {
+    opt.addEventListener('click', function() {
+      const roofIndex = parseInt(this.closest('.solar-question').getAttribute('data-question')) - 9;
+      const inclinaison = this.querySelector('.inclination-label').textContent;
+      console.log(`Clic sur inclinaison: ${inclinaison} pour toiture ${roofIndex}`);
+      selectRoofInclination(roofIndex, inclinaison);
+    });
+  });
+ 
+  const roofCoverOptions = document.querySelectorAll('.roof-cover-option');
+  roofCoverOptions.forEach(opt => {
+    opt.addEventListener('click', function() {
+      const roofIndex = parseInt(this.closest('.solar-question').getAttribute('data-question')) - 9;
+      const couverture = this.querySelector('.roof-cover-label').textContent;
+      console.log(`Clic sur couverture: ${couverture} pour toiture ${roofIndex}`);
+      selectRoofCover(roofIndex, couverture);
+    });
+  });
+}
+
+
+// Appeler cette fonction après l'initialisation
+document.addEventListener('DOMContentLoaded', function() {
+  // Code existant...
+ 
+  // Ajouter le débogage des toitures
+  setTimeout(debugRoofSelections, 1000);
+});
+</script>
+</body>
+</html>
